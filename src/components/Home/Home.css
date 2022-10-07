@@ -1,0 +1,6 @@
+.hotel-flex {
+    display: grid;
+    grid-template-columns: auto auto;
+    max-width: 100rem;
+    margin: auto;
+}

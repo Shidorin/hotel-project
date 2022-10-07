@@ -1,0 +1,45 @@
+.navbar-list {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    position: absolute;
+    margin: 3rem;
+}
+
+.navbar-list a:link, a:visited {
+    padding: 2rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    max-height: 925px;
+    background-size: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.img-div {
+    position: relative;
+    height: 925px;
+    overflow: hidden;
+    box-shadow: 2em;
+    background: linear-gradient(rgba(0, 0, 0, 0.327), rgba(0, 0, 0, 0.5)), url("/public/navImg.jpg");
+    color: white;
+}
+
+.nav-title {
+    font-weight: 300;
+    font-size: xx-large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    margin-top: 4rem;
+    left: 45%;
+}
