@@ -1,5 +1,9 @@
+export interface ICheckbox {
+    id: string, checked: boolean
+}
+
 export interface IFilter {
-    city?: string,
+    city: Array<ICheckbox>,
     style?: string,
     facilities?: string,
     price?: "asc" | "dsc" | undefined

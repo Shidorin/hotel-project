@@ -1,9 +1,11 @@
+import { IFilter } from "../../../interfaces/interfaces";
+
 interface InsuranceItemProps {
-    id: number;
-    checked: boolean | undefined;
+    id: string;
+    checked: boolean;
     onChange: (
         event: React.ChangeEvent<HTMLInputElement>,
-        id: number
+        id: string
     ) => void;
 }
 
@@ -11,6 +13,7 @@ export const FilterCheckbox = ({ id, checked, onChange }: InsuranceItemProps) =>
     return (
         <div>
             <label className="checkbox">
+                {id}
                 <input
                     type="checkbox"
                     checked={checked}
