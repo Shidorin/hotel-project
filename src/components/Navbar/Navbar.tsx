@@ -16,7 +16,7 @@ export const Navbar = () => {
             <header className='nav-title'>
                 <h1>HotelName</h1>
             </header>
-            <img alt="background image" style={{ display: "none" }}
+            <img alt="background" style={{ display: "none" }}
             //  src='./navImg.jpg'
             ></img>
         </nav>

@@ -1,0 +1,88 @@
+.hotel-card {
+    margin: 2rem;
+    position: relative;
+}
+
+.image-frag {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.top-card {
+    display: block;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.image-frag img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.5s;
+    transform: scale(1);
+    display: block;
+}
+
+.image-frag:hover img {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.hotel-card-header {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+    -moz-box-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    -moz-box-pack: center;
+    justify-content: center;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+
+    pointer-events: none;
+}
+
+.hotel-card-name {
+    font-family: "Playfair Display", serif;
+    font-size: 3.4rem;
+    font-weight: 400;
+    line-height: 3.6rem;
+}
+
+.hotel-card-city {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+.box-frag {
+
+    display: flex;
+    flex-direction: row;
+    margin-top: 1.8rem;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.hotel-card a:visited, a {
+    color: black;
+}
+
+.box-frag:hover {
+    color: white;
+    background-color: black;
+}
