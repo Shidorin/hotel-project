@@ -1,5 +1,3 @@
-import { IFilter } from "../../../interfaces/interfaces";
-
 interface InsuranceItemProps {
     id: string;
     checked: boolean;
@@ -10,6 +8,11 @@ interface InsuranceItemProps {
 }
 
 export const FilterCheckbox = ({ id, checked, onChange }: InsuranceItemProps) => {
+
+    /*
+        TODO
+        styling
+    */
     return (
         <div>
             <label className="checkbox">

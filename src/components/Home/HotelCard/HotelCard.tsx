@@ -3,6 +3,11 @@ import './HotelCard.css'
 import { IHotelCard } from '../../../interfaces/interfaces';
 
 export const HotelCard = (hotelData: IHotelCard, key: number) => {
+    /*
+        TODO
+        styling box-frag text
+        fix min width for cards
+    */
     return (
         <div className='hotel-card'>
             <Link to={`/hotel/${hotelData.name}`}>

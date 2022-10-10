@@ -1,9 +1,10 @@
 
 import { data } from "../data"
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IHotelCard, IFilter, ICheckbox } from "../../../interfaces/interfaces";
 import { HotelCard } from "../HotelCard/HotelCard";
 import { FilterCheckbox } from "./FilterCheckbox";
+import { Container } from "../Container/Container";
 
 
 interface IWrapper {
@@ -29,12 +30,12 @@ export const MainComponent = () => {
         setHotels(data);
     }, [hotels]);
 
-
+    // put hotel names as unique values in filterList state
     useEffect(() => {
         let arr: Array<ICheckbox> = [];
-        let tmp = [...new Map(hotels.map(hotel =>
+        let hotelMap = [...new Map(hotels.map(hotel =>
             [hotel.city, hotel])).values()]
-        for (let hotel of tmp) {
+        for (let hotel of hotelMap) {
             const newValue: ICheckbox = { id: hotel.city, checked: false }
             arr.push(newValue)
         }
@@ -43,8 +44,6 @@ export const MainComponent = () => {
             city: arr
         }));
     }, [hotels]);
-
-
 
     /*
         old select
@@ -59,10 +58,8 @@ export const MainComponent = () => {
     }
     */
 
-
     //  TSX filtered hotel cards
     const hotelCards = hotels.filter((hotel, index) => {
-
         // if every checkbox is not checked
         let tmp = 0;
         for (let inc of filterList.city) if (!inc.checked) tmp += 1;
@@ -76,11 +73,7 @@ export const MainComponent = () => {
         <HotelCard {...hotelData} key={index}></HotelCard>
     )
 
-
-    // unique city values array
-    const hotelOptions = [...new Map(hotels.map(hotel =>
-        [hotel.city, hotel])).values()];
-
+    // handle checkbox
     const onChangeHandler = (
         e: React.ChangeEvent<HTMLInputElement>,
         id: string
@@ -94,17 +87,11 @@ export const MainComponent = () => {
     };
 
 
-    /* 
-        TODO 
-        refactor select to checkbox 
-        button opens modal with checkbox
-        for more filter criterias
-    */
-    // TSX selectbox for city
+
+    // TSX checkbox
     const citySelect = (
         <div style={{ position: "absolute", left: "50%", zIndex: "2" }}>
             <p>sort list</p>
-            {/* <select name="city" id="city" onChange={formfnc} value={filterList.city}> */}
             {filterList.city.map((option, key) => (
                 <FilterCheckbox
                     id={option.id}
@@ -113,20 +100,29 @@ export const MainComponent = () => {
                     onChange={onChangeHandler}
                 />
             ))}
-            {/* </select> */}
         </div>
     )
 
-
-
+    /* 
+        TODO 
+        button opens modal with checkbox
+        for more filter criterias
+    */
     return (
-        <div>
+        <div className="main-content">
             <header>Hotel list</header>
-            <button onClick={() => setToggleWrapper(prev => ({ ...prev, city: !prev.city }))}>City</button>
+            <div className="filter-bar">
+                <button onClick={() => setToggleWrapper(prev => ({ ...prev, city: !prev.city }))}>City</button>
+            </div>
 
             {toggleWrapper.city ? citySelect : ""}
             <article className="hotel-flex">
                 {hotelCards}
+            </article>
+
+
+            <article>
+                <Container />
             </article>
         </div>
     )

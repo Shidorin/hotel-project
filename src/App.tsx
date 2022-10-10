@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 import { About } from './components/About';
 import { Navbar } from "./components/Navbar/Navbar"
 import { Home } from './components/Home/Home';
+import { Cookies } from './components/Cookies/Cookies';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         {/* <Route path='products' element={<Products />} /> */}
         {/* <Route path='*' element={<ErrorPage />} /> */}
       </Routes>
+      <Footer />
+      <Cookies />
     </div>
   );
 }
