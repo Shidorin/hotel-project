@@ -1,7 +1,13 @@
 import './Container.css'
 
+interface IContainer {
+    title: string;
+    text: string;
+    img: string
+}
 
-export function Container() {
+
+export function Container({ title, text, img }: IContainer) {
     return (
         <div className="container-flexbox">
             <div className="container-text">

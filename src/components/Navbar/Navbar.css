@@ -6,7 +6,7 @@
     margin: 3rem;
 }
 
-.navbar-list a:link, a:visited {
+.navbar-list a:link, .navbar-list a:visited {
     padding: 2rem;
     font-weight: 500;
     cursor: pointer;

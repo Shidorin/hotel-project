@@ -1,14 +1,20 @@
 
 import { data } from "../data"
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IHotelCard, IFilter, ICheckbox } from "../../../interfaces/interfaces";
 import { HotelCard } from "../HotelCard/HotelCard";
 import { FilterCheckbox } from "./FilterCheckbox";
 import { Container } from "../Container/Container";
+import { Pagination } from "./Pagination";
 
 
 interface IWrapper {
     city: boolean,
+}
+
+interface IPagination {
+    currentPage: number,
+    cardsPerPage: number,
 }
 
 export const MainComponent = () => {
@@ -24,6 +30,10 @@ export const MainComponent = () => {
         facilities: "",
         price: undefined,
     });
+    const [pagination, setPagination] = useState<IPagination>({
+        currentPage: 1,
+        cardsPerPage: 2,
+    })
 
 
     useEffect(() => {
@@ -31,7 +41,7 @@ export const MainComponent = () => {
     }, [hotels]);
 
     // put hotel names as unique values in filterList state
-    useEffect(() => {
+    useMemo(() => {
         let arr: Array<ICheckbox> = [];
         let hotelMap = [...new Map(hotels.map(hotel =>
             [hotel.city, hotel])).values()]
@@ -45,31 +55,59 @@ export const MainComponent = () => {
         }));
     }, [hotels]);
 
-    /*
-        old select
 
-    const formfnc = (e: FormEvent<HTMLSelectElement>) => {
-        const formValue = e.currentTarget.value;
-        const formId = e.currentTarget.id;
-        setFilterList(prev => ({
+
+
+
+
+
+
+
+    const indexOfLast = pagination.currentPage * pagination.cardsPerPage;
+    const indexOfFirst = indexOfLast - pagination.cardsPerPage;
+    const currentHotel = hotels.slice(indexOfFirst, indexOfLast)
+
+    const paginate = (pageNumber: number) => {
+        setPagination(prev => ({
             ...prev,
-            [formId]: formValue,
+            currentPage: pageNumber,
         }))
+        console.log(paginate)
     }
-    */
+
+
+    const todosData = useMemo(() => {
+
+        const filteredHotels = hotels.filter((hotel, index) => {
+            // if every checkbox is not checked
+            let tmp = 0;
+            for (let inc of filterList.city) if (!inc.checked) tmp += 1;
+            if (filterList.city.length === tmp) return hotel;
+
+            for (let inc of filterList.city) {
+                if ((inc.checked && inc.id === hotel.city)) return hotel;
+            }
+            return false;
+        }).slice(indexOfFirst, indexOfLast)
+        console.log(filteredHotels)
+        return filteredHotels;
+
+    }, [pagination.currentPage, filterList]);
 
     //  TSX filtered hotel cards
-    const hotelCards = hotels.filter((hotel, index) => {
-        // if every checkbox is not checked
-        let tmp = 0;
-        for (let inc of filterList.city) if (!inc.checked) tmp += 1;
-        if (filterList.city.length === tmp) return hotel;
+    // const hotelCards = currentHotel.filter((hotel, index) => {
+    //     // if every checkbox is not checked
+    //     let tmp = 0;
+    //     for (let inc of filterList.city) if (!inc.checked) tmp += 1;
+    //     if (filterList.city.length === tmp) return hotel;
 
-        for (let inc of filterList.city) {
-            if ((inc.checked && inc.id === hotel.city)) return hotel;
-        }
-        return false;
-    }).map((hotelData, index) =>
+    //     for (let inc of filterList.city) {
+    //         if ((inc.checked && inc.id === hotel.city)) return hotel;
+    //     }
+    //     return false;
+    // })
+
+    const hotelCards = todosData.map((hotelData, index) =>
         <HotelCard {...hotelData} key={index}></HotelCard>
     )
 
@@ -107,6 +145,9 @@ export const MainComponent = () => {
         TODO 
         button opens modal with checkbox
         for more filter criterias
+        pagination styling
+        pagination with filter correct page
+        url link for pages
     */
     return (
         <div className="main-content">
@@ -119,11 +160,35 @@ export const MainComponent = () => {
             <article className="hotel-flex">
                 {hotelCards}
             </article>
-
+            <Pagination
+                cardPerPage={pagination.cardsPerPage}
+                totalCards={hotels.length}
+                paginate={paginate}
+            />
 
             <article>
-                <Container />
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
             </article>
         </div>
     )
+
+
+    /*
+    old select
+
+    const formfnc = (e: FormEvent<HTMLSelectElement>) => {
+    const formValue = e.currentTarget.value;
+    const formId = e.currentTarget.id;
+    setFilterList(prev => ({
+        ...prev,
+        [formId]: formValue,
+    }))
 }
+*/
+}
+
+
