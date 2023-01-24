@@ -1,4 +1,5 @@
 .navbar-list {
+    top: 0%;
     display: flex;
     flex-direction: row;
     list-style-type: none;
@@ -15,31 +16,70 @@
     text-decoration: none;
 }
 
-img {
-    width: 100%;
-    max-height: 925px;
-    background-size: cover;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    object-fit: cover;
-    object-position: center;
+
+@media (min-width: 1200px) {
+    .img-div img {
+        width: 100%;
+        max-height: 55rem;
+        background-size: cover;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .img-div {
+        position: relative;
+        height: 55rem;
+        overflow: hidden;
+        box-shadow: 2em;
+        background: linear-gradient(rgba(0, 0, 0, 0.327), rgba(0, 0, 0, 0.5)), url("/public/navImg.jpg");
+        color: white;
+    }
+
+    .nav-title {
+        font-weight: 300;
+        font-size: xx-large;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: absolute;
+        margin-top: 4rem;
+        left: 45%;
+    }
 }
 
-.img-div {
-    position: relative;
-    height: 925px;
-    overflow: hidden;
-    box-shadow: 2em;
-    background: linear-gradient(rgba(0, 0, 0, 0.327), rgba(0, 0, 0, 0.5)), url("/public/navImg.jpg");
-    color: white;
-}
 
-.nav-title {
-    font-weight: 300;
-    font-size: xx-large;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    position: absolute;
-    margin-top: 4rem;
-    left: 45%;
+
+@media (max-width: 900px) {
+    .img-div img {
+        width: 100%;
+        max-height: 25rem;
+        background-size: cover;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .img-div {
+        position: relative;
+        height: 25rem;
+        overflow: hidden;
+        box-shadow: 2em;
+        background: linear-gradient(rgba(0, 0, 0, 0.327), rgba(0, 0, 0, 0.5)), url("/public/navImg.jpg");
+        color: white;
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-title {
+        font-weight: 300;
+        font-size: xx-large;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        position: absolute;
+        /* margin-top: 10rem; */
+    }
 }

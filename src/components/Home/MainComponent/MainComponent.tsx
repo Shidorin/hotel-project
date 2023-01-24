@@ -65,18 +65,19 @@ export const MainComponent = () => {
 
     const indexOfLast = pagination.currentPage * pagination.cardsPerPage;
     const indexOfFirst = indexOfLast - pagination.cardsPerPage;
-    const currentHotel = hotels.slice(indexOfFirst, indexOfLast)
+    const currentHotel = hotels.slice(indexOfFirst, indexOfLast);
+    let totalCards = hotels.length;
 
     const paginate = (pageNumber: number) => {
         setPagination(prev => ({
             ...prev,
             currentPage: pageNumber,
         }))
-        console.log(paginate)
+        // console.log(paginate)
     }
 
 
-    const todosData = useMemo(() => {
+    const filteredHotelsData = useMemo(() => {
 
         const filteredHotels = hotels.filter((hotel, index) => {
             // if every checkbox is not checked
@@ -88,14 +89,16 @@ export const MainComponent = () => {
                 if ((inc.checked && inc.id === hotel.city)) return hotel;
             }
             return false;
-        }).slice(indexOfFirst, indexOfLast)
-        console.log(filteredHotels)
-        return filteredHotels;
+        })
+        
+        totalCards = filteredHotels.length;
+        
+        return filteredHotels.slice(indexOfFirst, indexOfLast);;
 
     }, [pagination.currentPage, filterList]);
 
     //  TSX filtered hotel cards
-    // const hotelCards = currentHotel.filter((hotel, index) => {
+    // const hotelCards = hotels.filter((hotel, index) => {
     //     // if every checkbox is not checked
     //     let tmp = 0;
     //     for (let inc of filterList.city) if (!inc.checked) tmp += 1;
@@ -107,9 +110,12 @@ export const MainComponent = () => {
     //     return false;
     // })
 
-    const hotelCards = todosData.map((hotelData, index) =>
+    const hotelCards = filteredHotelsData.map((hotelData, index) =>
         <HotelCard {...hotelData} key={index}></HotelCard>
     )
+
+    // console.log(filterList.city.length);
+
 
     // handle checkbox
     const onChangeHandler = (
@@ -121,6 +127,10 @@ export const MainComponent = () => {
             city: prev.city.map(
                 el => el.id === id ? { ...el, checked: !el.checked } : el
             )
+        }));
+        setPagination(prev => ({
+            ...prev,
+            currentPage: 1,
         }));
     };
 
@@ -162,11 +172,47 @@ export const MainComponent = () => {
             </article>
             <Pagination
                 cardPerPage={pagination.cardsPerPage}
-                totalCards={hotels.length}
+                totalCards={totalCards}
+                currentPage={pagination.currentPage}
                 paginate={paginate}
             />
 
             <article>
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
+                <Container
+                    title=""
+                    text=""
+                    img=""
+                />
                 <Container
                     title=""
                     text=""

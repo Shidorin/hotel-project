@@ -12,7 +12,7 @@ export const HotelCard = (hotelData: IHotelCard, key: number) => {
         <div className='hotel-card'>
             <Link to={`/hotel/${hotelData.name}`}>
 
-                <div className='top-card'>
+                <div className='top-card' id='test'>
                     <picture className="image-frag">
                         <img src={hotelData.img} alt="hotel" />
                     </picture>
@@ -25,10 +25,10 @@ export const HotelCard = (hotelData: IHotelCard, key: number) => {
 
                 <div className="box-frag">
                     <div>
-                        <p>Night from</p>
-                        <p>${hotelData.cost}</p>
+                        <p className='box-frag-name'>Night from</p>
+                        <p className='box-frag-cost'>${hotelData.cost}</p>
                     </div>
-                    <p style={{ margin: "1rem 2rem 1rem auto" }}>BOOK</p>
+                    <p className="box-frag-book">BOOK</p>
                 </div>
             </Link>
         </div >
