@@ -1,0 +1,30 @@
+.cookie-bar {
+    bottom: 0px;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    padding: 0.5rem 1.5rem 0.5rem 1.3rem;
+    min-height: 4rem;
+    background-color: #282828;
+    -moz-box-pack: justify;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cookie-bar p {
+    color: white;
+}
+
+.cookie-bar button {
+    background-color: #282828;
+    border: none;
+    color: white;
+    display: flex;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.1rem;
+    padding: 0.6rem 1.2rem;
+    margin-right: 2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
