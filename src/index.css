@@ -16,3 +16,9 @@ code {
   margin: 0;
   padding: 0;
 }
+a{
+  color: initial;
+  text-decoration: initial;
+  font-size: initial;
+  /* other properties */
+}
