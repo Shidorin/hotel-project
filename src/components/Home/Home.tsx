@@ -7,8 +7,8 @@ import { MainComponent } from './MainComponent/MainComponent';
 
 export const Home = () => {
     return (
-        <main>
-            <MainComponent/>
-        </main>
+
+        <MainComponent />
+
     )
 };

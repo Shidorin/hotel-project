@@ -23,7 +23,6 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-
 }
 
 .navbar-list li {
@@ -51,7 +50,7 @@
     position: fixed;
     background: white;
     color: black;
-    box-shadow: none;
+    box-shadow: 0px 0px 10px #ccc, 0px 0px 15px #ccc;
 }
 
 .navbar-list.scrolled li a {

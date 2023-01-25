@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
 }
 
 code {
@@ -16,9 +17,15 @@ code {
   margin: 0;
   padding: 0;
 }
-a{
+
+a {
   color: initial;
   text-decoration: initial;
   font-size: initial;
-  /* other properties */
+}
+
+main { 
+  max-width: 100rem;
+  margin: auto;
+  margin-top: 30px;
 }

@@ -90,9 +90,9 @@ export const MainComponent = () => {
             }
             return false;
         })
-        
+
         totalCards = filteredHotels.length;
-        
+
         return filteredHotels.slice(indexOfFirst, indexOfLast);;
 
     }, [pagination.currentPage, filterList]);
@@ -160,7 +160,7 @@ export const MainComponent = () => {
         url link for pages
     */
     return (
-        <div className="main-content">
+        <main>
             <header>Hotel list</header>
             <div className="filter-bar">
                 <button onClick={() => setToggleWrapper(prev => ({ ...prev, city: !prev.city }))}>City</button>
@@ -198,28 +198,9 @@ export const MainComponent = () => {
                     text=""
                     img=""
                 />
-                <Container
-                    title=""
-                    text=""
-                    img=""
-                />
-                <Container
-                    title=""
-                    text=""
-                    img=""
-                />
-                <Container
-                    title=""
-                    text=""
-                    img=""
-                />
-                <Container
-                    title=""
-                    text=""
-                    img=""
-                />
+
             </article>
-        </div>
+        </main>
     )
 
 

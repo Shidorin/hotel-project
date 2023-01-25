@@ -1,0 +1,85 @@
+/* INPUT STYLE */
+input[type="text"], textarea {
+    background-color: #f0f0f0;
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    color: #000;
+    cursor: pointer;
+    height: 47px;
+    padding: .5em 0 .5em 16px;
+    width: 100%;
+}
+
+
+
+
+
+/* LABELS & INPUTS */
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.form-container div {
+    position: relative;
+}
+
+.form-container>div {
+    margin: 20px;
+    flex: 1 0 calc(33% - 20px);
+}
+
+.text-area-div {
+    position: relative;
+    margin: 20px;
+}
+
+
+main form div>label, .text-area-div label {
+    left: 0;
+    margin-left: 10px;
+    /* opacity: 0; */
+    position: absolute;
+    top: 0;
+    -webkit-transition: .5s ease;
+    transition: .5s ease;
+    color: black;
+}
+
+/* transform labels */
+input:focus~label,
+textarea:focus~label {
+    top: -25px;
+    margin-left: 0;
+}
+
+
+/* BUTTON SUBMIT */
+
+.submit-btn {
+    background-color: #000;
+    border: 1px solid #000;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: Neue Helvetica, helvetica, sans-serif;
+    font-size: .625rem;
+    font-style: normal;
+    font-weight: 700;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color .3s ease-out, color .3s ease-out, border-color .3s ease-out;
+    border-radius: 5px;
+
+}
+
+.submit-btn:hover {
+    color: black;
+    background-color: white;
+}
