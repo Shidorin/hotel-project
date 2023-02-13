@@ -27,7 +27,7 @@
 
 
 .hotel-card {
-    margin: 2rem;
+    /* margin: 2rem; */
     position: relative;
 }
 
@@ -44,22 +44,13 @@
     position: relative;
 }
 
-
-
-
-
-.image-frag:hover img {
+/* on card hover: scale img by 1.1 */
+.hotel-card:hover a .top-card picture img {
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
 
-/* does not work?  */
-.box-frag:hover .top-card picture.image-frag {
-    -moz-transform: scale(1.1) !important;
-    -webkit-transform: scale(1.1) !important;
-    transform: scale(1.1) !important;
-}
 
 
 .hotel-card-header {
@@ -115,7 +106,7 @@
 
 .box-frag:hover {
     color: white;
-    background-color: black;
+    background-color: #282828;
 }
 
 

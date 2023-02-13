@@ -2,13 +2,16 @@
     .hotel-flex {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
+
     }
 }
 
 @media (min-width: 1200px) {
     .hotel-flex {
+        margin: 2rem 0;
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: calc(50% - 1rem) calc(50% - 1rem);
+        gap: 2rem;
     }
 }
 

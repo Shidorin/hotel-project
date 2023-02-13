@@ -1,0 +1,81 @@
+.card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.carousel-child {
+    display: flex;
+    flex-direction: column;
+    margin: 0 12px;
+    background-color: #f5f5f5;
+    align-items: center;
+    position: relative;
+}
+
+.carousel-child div h3 {
+    font-family: Neue Helvetica, helvetica, sans-serif;
+    text-transform: uppercase;
+    font-size: .75rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: .25em;
+    line-height: 1.3em;
+}
+
+
+.carousel-child div h3::after {
+    background-color: currentColor;
+    content: "";
+    display: block;
+    height: 2px;
+    margin: 15px auto 10px;
+    width: 40px;
+}
+
+
+.card-body a:hover {
+    border-color: #767676;
+    color: #767676;
+}
+
+
+
+@media only screen and (min-width: 701px) {
+    .carousel-child img {
+        width: 240px;
+    }
+
+}
+
+@media only screen and (min-width: 1701px) {
+    .carousel-child picture img {
+        width: 490px;
+        max-height: 17rem;
+        background-size: cover;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .card-body {
+        padding: 1rem 2rem 5rem 2rem;
+    }
+
+    .card-body p {
+        margin-top: 1rem;
+    }
+
+    .card-body a {
+        display: inline-block;
+        align-items: center;
+        justify-content: center;
+        bottom: 0;
+        position: absolute;
+        margin-bottom: 1em;
+        transform: translate(-50%, -50%);
+        transition: background-color .3s ease-out, color .3s ease-out, border-color .3s ease-out;
+        border-bottom: 1px solid #000;
+    }
+}

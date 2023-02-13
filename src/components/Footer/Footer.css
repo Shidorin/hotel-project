@@ -1,0 +1,35 @@
+/* #1c1c1c; //#282828 */
+
+footer {
+    position: static;
+    bottom: 0;
+    width: 100%;
+    max-height: 20rem;
+    background-color: #282828;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer li {
+    list-style: none;
+}
+
+footer a {
+    color: white;
+    cursor: pointer;
+}
+
+.footer-links ul {
+    display: flex;
+
+    flex-direction: row;
+    column-gap: 15px;
+}
+
+.footer-social {
+    padding-bottom: 2rem;
+}
+
+.footer-social {}

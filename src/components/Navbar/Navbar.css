@@ -13,10 +13,11 @@
     background: linear-gradient(to bottom, rgba(28, 28, 28, 0.7) 0, rgba(28, 28, 28, 0) 100%);
     padding-bottom: 2rem;
     padding-top: 1rem;
+    transition: .3s ease;
 }
 
 .navbar-list.scrolled header a h1 {
-    color: black;
+    color: #282828;
 }
 
 .navbar-list ul {
@@ -30,17 +31,39 @@
     margin-right: 2rem;
 }
 
-.navbar-list li.active {
+.navbar-list a.active {
     color: white;
     border-bottom: 4px solid white;
 }
 
 .navbar-list.scrolled li.active {
-    /* color: black; */
-    border-bottom: 4px solid black;
+    border-bottom: 4px solid #282828;
+}
+
+.burger-nav {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background: #282828;
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    min-height: 45px;
+}
+
+.burger-button {
+    margin-left: .5em;
+    transition: all 0.5s;
+}
+
+
+.burger-nav button {
+    background: transparent;
+    border: none;
 }
 
 .navbar-list li a {
+    display: block;
     text-decoration: none;
     color: white;
     letter-spacing: .1em;
@@ -55,7 +78,7 @@
 
 .navbar-list.scrolled li a {
     text-decoration: none;
-    color: black;
+    color: #282828;
 }
 
 @media (min-width: 1200px) {
@@ -73,7 +96,7 @@
     .img-div {
         position: relative;
         height: 55rem;
-        overflow: hidden;
+        /* overflow: hidden; */
         box-shadow: 2em;
         background: linear-gradient(rgba(0, 0, 0, 0.327), rgba(0, 0, 0, 0.5)), url("/public/navImg.jpg");
         color: white;
@@ -86,12 +109,53 @@
         margin-right: 5rem;
         color: white;
     }
+
+    .burger-nav, .menuNav {
+        display: none;
+    }
 }
 
 
 
 @media (max-width: 900px) {
-    .img-div img {
+
+    .navbar-list {
+        display: none;
+    }
+
+    .menuNav {
+        overflow-y: scroll;
+        list-style: none;
+        position: fixed;
+        top: 0;
+        background: #282828;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 0;
+        overflow: hidden;
+        max-width: 170px;
+        z-index: 9;
+    }
+
+    .menuNav a {
+        display: block;
+        padding: 10px 40px;
+        text-decoration: none;
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .menuNav li:first-child {
+        margin-top: 2.5rem;
+    }
+
+    .menuNav.showMenu {
+        width: 100%;
+    }
+
+    /* .img-div img {
         width: 100%;
         max-height: 25rem;
         background-size: cover;
@@ -100,12 +164,12 @@
         margin-right: auto;
         object-fit: cover;
         object-position: center;
-    }
+    } */
 
     .img-div {
         position: relative;
         height: 25rem;
-        overflow: hidden;
+        /* overflow: hidden; */
         box-shadow: 2em;
         background: linear-gradient(rgba(0, 0, 0, 0.327), rgba(0, 0, 0, 0.5)), url("/public/navImg.jpg");
         color: white;

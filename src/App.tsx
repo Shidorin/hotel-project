@@ -6,6 +6,7 @@ import { Home } from './components/Home/Home';
 import { Cookies } from './components/Cookies/Cookies';
 import { Footer } from './components/Footer/Footer';
 import { Contact } from './components/Contact/Contact';
+import { HotelList } from './components/HotelList/HotelList';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path='' element={<Home />} />
         <Route path='about' element={<About />} />
         <Route path='contact' element={<Contact />} />
-        {/* <Route path='products' element={<Products />} /> */}
+        <Route path='hotels' element={<HotelList />} />
         {/* <Route path='*' element={<ErrorPage />} /> */}
       </Routes>
       <Footer />

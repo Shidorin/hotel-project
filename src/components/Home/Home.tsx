@@ -1,4 +1,5 @@
 
+import { ReserveRow } from '../ReserveRow/ReserveRow';
 import './Home.css'
 import { MainComponent } from './MainComponent/MainComponent';
 // import { HomeFilter } from "../HomeFilter/HomeFilter";
@@ -7,8 +8,10 @@ import { MainComponent } from './MainComponent/MainComponent';
 
 export const Home = () => {
     return (
-
-        <MainComponent />
+        <div >
+            <ReserveRow />
+            <MainComponent />
+        </div>
 
     )
 };

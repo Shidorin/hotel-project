@@ -2,11 +2,11 @@
 
 export const About = () => {
     return (
-        <footer>
+        <div className="row">
             <h1>
                 about
             </h1>
-        </footer>
+        </div>
     )
 }
 

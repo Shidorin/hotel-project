@@ -119,7 +119,7 @@ export const Contact = () => {
                     style={{
 
                     }}
-                    rows={40}
+                    rows={7}
                     cols={50}
                 // onChange={handleChange}
                 />
@@ -136,14 +136,17 @@ export const Contact = () => {
 
     return (
         <main>
+            <div className='row'>
 
-            <form
-                onSubmit={handleSubmit}
-                className='form'
-            // style={{ maxWidth: "100rem", margin: "auto" }}
-            >
-                {formTSX}
-            </form >
+                <h1>Contact us</h1>
+                <form
+                    onSubmit={handleSubmit}
+                    className='form'
+                // style={{ maxWidth: "100rem", margin: "auto" }}
+                >
+                    {formTSX}
+                </form >
+            </div>
         </main>
     );
 }

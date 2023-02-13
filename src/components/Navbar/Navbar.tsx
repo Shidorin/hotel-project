@@ -1,12 +1,48 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { text } from 'stream/consumers';
 import './Navbar.css'
+import { MdClose } from "react-icons/md"
+import { FiMenu } from "react-icons/fi"
 
-
+interface ILinks {
+    "id": number,
+    "path": string,
+    "text": string
+}
 
 export const Navbar = () => {
     const [activeLink, setActiveLink] = useState("home");
     const [scrolled, setScrolled] = useState(false);
+    const [isBurgerOpen, setOpenBurger] = useState(false);
+    const [links] = useState<ILinks[]>([
+        {
+            id: 1,
+            path: "/",
+            text: "Home",
+        },
+        {
+            id: 2,
+            path: "/hotels",
+            text: "Hotels",
+        },
+        {
+            id: 3,
+            path: "/events",
+            text: "Events",
+        },
+        {
+            id: 4,
+            path: "/about",
+            text: "About",
+        },
+        {
+            id: 5,
+            path: "/contact",
+            text: "Contact",
+        },
+    ]
+    )
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -23,6 +59,13 @@ export const Navbar = () => {
         }
     };
 
+    const handleBurger = () => {
+        setOpenBurger(prev => !prev)
+    }
+
+    const closeBurger = () => {
+        setOpenBurger(false)
+    }
 
     const navElements = (
         <div className={`navbar-list ${scrolled ? "scrolled" : ""}`}>
@@ -30,41 +73,63 @@ export const Navbar = () => {
                 <Link to='/'
                     className={activeLink === "home" ? "active" : ""}
                     onClick={() => setActiveLink("home")}
-                ><h1>Hotello</h1></Link>
+                ><h1>Hotel</h1></Link>
             </header>
             <ul >
-                <li
-                    className={activeLink === "home" ? "active" : ""}
-                    onClick={() => setActiveLink("home")}
-                ><Link to='/'>Home</Link></li>
-                <li
-                    className={activeLink === "hotels" ? "active" : ""}
-                    onClick={() => setActiveLink("hotels")}
-                ><Link to='/hotels'>Hotels</Link></li>
-                <li
-                    className={activeLink === "events" ? "active" : ""}
-                    onClick={() => setActiveLink("events")}
-                ><Link to='/events'>Events</Link></li>
-                <li
-                    className={activeLink === "about" ? "active" : ""}
-                    onClick={() => setActiveLink("about")}
-                ><Link to='/about'>About</Link></li>
-                <li
-                    className={activeLink === "contact" ? "active" : ""}
-                    onClick={() => setActiveLink("contact")}
-                ><Link to='/contact'>Contact</Link></li>
+                {links.map(link => (
+                    <li
+                    key={link.id}
+                        className=''>
+                        <NavLink
+                            to={link.path} end
+                            className={({ isActive }) =>
+                                isActive ? "active" : undefined
+                            }
+                            onClick={() => closeBurger()}
+                        >
+                            {link.text}
+                        </NavLink>
+                    </li>
+                ))}
             </ul>
         </div>
+    )
+
+    const navBurger = (
+        <ul className={`menuNav ${isBurgerOpen ? " showMenu" : ""}`}>
+            {links.map(link => (
+                <li
+                    key={link.id}
+                    className=''>
+                    <NavLink
+                        to={link.path} end
+                        className={({ isActive }) =>
+                            isActive ? "active" : undefined
+                        }
+                        onClick={() => closeBurger()}
+                    >
+                        {link.text}
+                    </NavLink>
+                </li>
+            ))}
+        </ul>
     )
 
 
     return (
         <nav className='img-div'>
+            <div className='burger-nav'>
+                <button className='burger-button' onClick={handleBurger}>
+                    {isBurgerOpen ? (
+                        <MdClose style={{ color: "#fff", width: "40px", height: "40px" }} />
+                    ) : (
+                        <FiMenu style={{ color: "white", width: "40px", height: "40px" }} />
+                    )}
+                    <div className={isBurgerOpen ? 'burger-lines active' : 'burger-lines'} />
+                </button>
+            </div>
             {navElements}
-
-            <img alt="background" style={{ display: "none" }}
-            //  src='./navImg.jpg'
-            ></img>
+            {navBurger}
         </nav>
     )
 }
