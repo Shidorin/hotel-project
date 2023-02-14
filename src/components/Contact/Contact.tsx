@@ -11,6 +11,12 @@ interface IForm {
     message?: string,
 }
 
+interface IInputs {
+    "id": number,
+    "varName": keyof IForm,
+    "text": string
+}
+
 export const Contact = () => {
     const [formData, setFormData] = useState<IForm>({
         firstName: undefined,
@@ -33,6 +39,38 @@ export const Contact = () => {
         // Perform form submission logic here
     };
 
+    const [inputs] = useState<IInputs[]>([
+        {
+            id: 1,
+            varName: "firstName",
+            text: "First Name",
+        },
+        {
+            id: 2,
+            varName: "lastName",
+            text: "Last Name",
+        },
+        {
+            id: 3,
+            varName: "email",
+            text: "Email",
+        },
+        {
+            id: 4,
+            varName: "phoneNumber",
+            text: "Phone number",
+        },
+        {
+            id: 5,
+            varName: "destination",
+            text: "Destination",
+        },
+        {
+            id: 6,
+            varName: "reason",
+            text: "Reason for contact",
+        },
+    ])
 
 
 
@@ -41,74 +79,20 @@ export const Contact = () => {
     const formTSX = (
         <>
             <div className='form-container'>
-                <div>
 
-                    <input
-                        type="text"
-                        name="firstName"
-                        id="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="firstName">First Name</label>
-                </div>
-
-                <div>
-                    <input
-                        type="text"
-                        name="lastName"
-                        id="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="lastName">Last Name</label>
-                </div>
-
-                <div>
-                    <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="email">Email</label>
-                </div>
-
-                <div>
-                    <input
-                        type="text"
-                        name="phoneNumber"
-                        id="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="phoneNumber">Phone number</label>
-                </div>
-
-                <div>
-                    <input
-                        type="text"
-                        name="destination"
-                        id="destination"
-                        value={formData.destination}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="destination">Destination</label>
-                </div>
-
-                <div>
-                    <input
-                        type="text"
-                        name="reason"
-                        id="reason"
-                        value={formData.reason}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="reason">Reason for contact</label>
-                </div>
+                {inputs.map(input => (
+                    <div>
+                        <input
+                            type="text"
+                            name={input.varName}
+                            id={input.varName}
+                            value={formData[input.varName]}
+                            onChange={handleChange}
+                        />
+                        <label className={`${formData[input.varName] !== undefined ? "active" : ""}`} htmlFor={input.varName}>{input.text}</label>
+                    </div>
+                ))}
             </div>
-
 
             <div className='text-area-div' >
                 <textarea
@@ -123,7 +107,7 @@ export const Contact = () => {
                     cols={50}
                 // onChange={handleChange}
                 />
-                <label htmlFor="message">How can we help you?</label>
+                <label className={`${formData.message !== undefined ? "active" : ""}`} htmlFor="message">How can we help you?</label>
             </div>
             <div style={{ textAlign: "center", marginTop: "1em" }}>
                 <button className='submit-btn' type="submit">Submit</button>
