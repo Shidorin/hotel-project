@@ -1,4 +1,27 @@
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+    .hotel-flex {
+        display: grid;
+        grid-template-columns: calc(50% - 1rem) calc(50% - 1rem);
+        gap: 2rem;
+        margin: 0 1em;
+    }
+    .top-card {
+        display: block;
+        overflow: hidden;
+        position: relative;
+        max-height: 14rem;
+    }
+
+    .pagination {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 2em;
+    }
+}
+
+
+@media (max-width: 750px) {
     .image-frag img {
         width: 100%;
         height: 200px;
@@ -9,22 +32,52 @@
         transform: scale(1);
         display: block;
     }
-}
 
-@media (min-width: 1200px) {
-    .image-frag img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
-        -moz-transition: all 0.4s;
-        -webkit-transition: all 0.4s;
-        transition: all 0.5s;
-        transform: scale(1);
-        display: block;
+    .hotel-flex {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 2rem;
+        margin: 0 1em;
+    }
+
+    .pagination {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 2em;
     }
 }
 
 
+
+
+@media (min-width: 1200px) {
+
+    .hotel-flex {
+        margin: 2rem 0;
+        display: grid;
+        grid-template-columns: calc(50% - 1rem) calc(50% - 1rem);
+        gap: 2rem;
+    }
+
+    .pagination {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+}
+
+
+.image-frag img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    transition: all 0.5s;
+    transform: scale(1);
+    display: block;
+}
 
 .hotel-card {
     /* margin: 2rem; */
@@ -136,4 +189,51 @@
     font-style: normal;
     font-weight: 600;
     padding-right: 2rem;
+}
+
+
+
+
+
+.page-item {
+    list-style: none;
+}
+
+.page-link {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.15;
+    font-weight: 500;
+
+    width: 2rem;
+    height: 2rem;
+    color: #282828;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.page-link.active {
+    border-bottom:  3px solid #282828;
+}
+
+.page-circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: white;
+    border-color: gray;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+}
+
+.page-circle:active {
+    box-shadow: none;
+    border-color: gray;
+    outline: none;
+}
+
+.page-icon {
+    max-width: 0.6rem;
 }

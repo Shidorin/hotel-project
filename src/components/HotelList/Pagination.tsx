@@ -18,6 +18,7 @@ export function Pagination({ cardPerPage, totalCards, currentPage, paginate }: I
 
 
 
+
     return (
         <div>
             <ul className="pagination">
@@ -26,16 +27,20 @@ export function Pagination({ cardPerPage, totalCards, currentPage, paginate }: I
                 </button>
                 {pageNumbers.map(number => (
                     <li key={number} className="page-item">
-                        <button className="page-link" onClick={() => paginate(number)}>
+                        <button className={`page-link ${number === currentPage ? "active" : ""}`} onClick={() => paginate(number)}>
                             {number}
                         </button>
                     </li>
                 ))}
 
-                <button className="page-circle" aria-label="previous page" disabled={currentPage === Math.ceil(totalCards / cardPerPage)} onClick={() => {
-                    // console.log(currentPage, totalCards, cardPerPage);           // console log
-                    paginate(currentPage + 1)
-                }}>
+                <button
+                    className="page-circle"
+                    aria-label="previous page"
+                    disabled={currentPage === Math.ceil(totalCards / cardPerPage)}
+                    onClick={() => {
+
+                        paginate(currentPage + 1)
+                    }}>
                     <i className="material-icons">keyboard_arrow_right</i>
                 </button>
             </ul>

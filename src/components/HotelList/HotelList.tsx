@@ -1,6 +1,6 @@
 import './HotelList.css'
 import { data } from "../data"
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { IHotelCard, IFilter, ICheckbox } from "../../interfaces/interfaces";
 import { HotelCard } from "./HotelCard/HotelCard";
 import { FilterCheckbox } from "./FilterCheckbox";
@@ -66,7 +66,11 @@ export const HotelList = () => {
             ...prev,
             currentPage: pageNumber,
         }))
-        // console.log(paginate)
+
+        if (componentRef.current) {
+            componentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
     }
 
 
@@ -127,6 +131,11 @@ export const HotelList = () => {
         </div>
     )
 
+    const componentRef = useRef<HTMLDivElement>(null);
+
+
+
+
     /* 
         TODO 
         button opens modal with checkbox
@@ -138,7 +147,7 @@ export const HotelList = () => {
 
     return (
         <main>
-            <div className='row'>
+            <div className='row' ref={componentRef}>
 
                 <h1>Our hotels</h1>
                 <div className="filter-bar">
@@ -146,7 +155,7 @@ export const HotelList = () => {
                 </div>
 
                 {toggleWrapper.city ? citySelect : ""}
-                <article className="hotel-flex">
+                <article className="hotel-flex" >
                     {hotelCards}
                 </article>
                 <Pagination
