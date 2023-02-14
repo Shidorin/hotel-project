@@ -25,3 +25,21 @@
     max-height: 400px;
     object-fit: cover;
 }
+
+
+@media (max-width: 1200px) {
+
+    .container-flexbox {
+        /* display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+        gap: 4rem;*/
+        display: flex;
+        flex-direction: column-reverse;
+
+        /* row-gap: 2rem; */
+        /* margin: 2rem; */
+    }
+}

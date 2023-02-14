@@ -41,8 +41,7 @@ export const Navbar = () => {
             path: "/contact",
             text: "Contact",
         },
-    ]
-    )
+    ])
 
     useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -78,7 +77,7 @@ export const Navbar = () => {
             <ul >
                 {links.map(link => (
                     <li
-                    key={link.id}
+                        key={link.id}
                         className=''>
                         <NavLink
                             to={link.path} end
