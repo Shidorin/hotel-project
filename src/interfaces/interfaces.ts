@@ -1,11 +1,12 @@
-export interface ICheckbox {
-    id: string, checked: boolean
-}
+// export interface ICheckbox {
+//     id: string, checked: boolean
+// }
 
 export interface IFilter {
-    city: Array<ICheckbox>,
-    style?: string,
-    facilities?: string,
+    // city: Array<ICheckbox>,
+    city?: string[],
+    style?: string[],
+    facilities?: string[],
     price?: "asc" | "dsc" | undefined
 }
 
@@ -14,4 +15,5 @@ export interface IHotelCard {
     name: string,
     city: string,
     cost: number,
+    style: string,
 }
