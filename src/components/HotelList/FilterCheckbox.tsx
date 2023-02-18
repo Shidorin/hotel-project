@@ -1,48 +1,74 @@
+import { Fragment, useEffect, useRef, useState } from "react";
+import { MdOutlineKeyboardArrowDown, MdCheckCircle } from "react-icons/md"
+
 interface IFilter {
-    // id: string;
     filterKey: string;
     filter?: string[];
-    // onChange: (
-    //     event: React.ChangeEvent<HTMLInputElement>,
-    //     id: string
-    // ) => void;
     handleFilterChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
     value?: string[];
 }
 export const FilterCheckbox = ({ filterKey, filter, handleFilterChange, value }: IFilter) => {
+    const [showDropdown, setShowDropdown] = useState(false);
+    const selectRef = useRef<HTMLSelectElement | null>(null);
 
-    /*
-    TODO
-    styling
-    //do zmiany nazwy
-    */
-    // console.log("tablica:")
-    // console.log(value)
+    const handleDropdownClick = () => {
+        setShowDropdown(!showDropdown);
+    };
+
+
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (selectRef.current && !(selectRef.current as Node).contains(event.target as Node)) {
+                setShowDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [selectRef]);
+
+
+    const selectedTag = value;
+    const firstTag = selectedTag?.[0];
+    const tagCount = selectedTag!.length - 1;
+
     return (
         <div className="filter-select">
-            <label className="checkbox">
-                {filterKey}
-            </label>
-            <select
-                id={filterKey}
-                onChange={handleFilterChange}
-                multiple={true}
-                value={value}
-            // value={selectedFilter ? selectedFilter.value : ""}
-            // onChange={e => onChange(e, id)}
+            <div
+                className={`label-select ${showDropdown ? 'dropdown' : ''}`}
+                onClick={handleDropdownClick}
             >
-                <option value="" disabled>
-                    any
-                </option>
-                {filter?.map((item, key) => (
-                    <option
-                        value={item}
-                        key={key}
-                    >
-                        {item}
-                    </option>
-                ))}
-            </select>
+                {selectedTag?.length === 0 ? <span style={{ backgroundColor: "#f0f0f0" }}> any </span> : ""}
+                {selectedTag?.length !== 0 ? <span>{firstTag}</span> : ""}
+                {tagCount > 0 && <span>+{tagCount}</span>}
+                <MdOutlineKeyboardArrowDown style={{ marginLeft: "auto" }} />
+            </div>
+            {showDropdown && (
+                <select
+                    id={filterKey}
+                    onChange={handleFilterChange}
+                    multiple={true}
+                    value={value}
+                    ref={selectRef}
+                >
+                    {filter?.map((item, key) => (
+                        <option
+                            value={item}
+                            key={key}
+                        >
+                            {item}
+                            {selectedTag?.includes(item) &&
+                                <MdCheckCircle
+                                    style={{ width: "20px", height: "20px", marginLeft: "auto" }}
+                                />}
+                        </option>
+                    ))}
+                </select>
+            )}
         </div>
     )
 }

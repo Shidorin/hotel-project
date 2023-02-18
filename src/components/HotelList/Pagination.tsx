@@ -1,4 +1,4 @@
-import '../Home/Home.css'
+import './HotelCard/HotelCard.css'
 
 interface IPagination {
     cardPerPage: number,
@@ -15,19 +15,22 @@ export function Pagination({ cardPerPage, totalCards, currentPage, paginate }: I
         pageNumbers.push(i);
     }
 
-
-
-
-
     return (
         <div>
             <ul className="pagination">
-                <button className="page-circle" aria-label="previous page" disabled={currentPage === 1} onClick={() => paginate(currentPage - 1)}>
+                <button
+                    className="page-circle"
+                    aria-label="previous page"
+                    disabled={currentPage === 1}
+                    onClick={() => paginate(currentPage - 1)}
+                >
                     <i className="material-icons">keyboard_arrow_left</i>
                 </button>
                 {pageNumbers.map(number => (
                     <li key={number} className="page-item">
-                        <button className={`page-link ${number === currentPage ? "active" : ""}`} onClick={() => paginate(number)}>
+                        <button
+                            className={`page-link ${number === currentPage ? "active" : ""}`}
+                            onClick={() => paginate(number)}>
                             {number}
                         </button>
                     </li>
@@ -38,7 +41,6 @@ export function Pagination({ cardPerPage, totalCards, currentPage, paginate }: I
                     aria-label="previous page"
                     disabled={currentPage === Math.ceil(totalCards / cardPerPage)}
                     onClick={() => {
-
                         paginate(currentPage + 1)
                     }}>
                     <i className="material-icons">keyboard_arrow_right</i>

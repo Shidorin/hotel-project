@@ -1,0 +1,158 @@
+.active-filters {
+    display: flex;
+    flex-direction: row;
+    margin: 0 1rem;
+    margin-bottom: 1em;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 1em;
+
+    /* display: inline-block; */
+}
+
+
+.filter {
+    display: inline-block;
+    padding: .2em .5em;
+    margin-right: .75rem;
+    background-color: #f5f5f5;
+    border: 1px solid black;
+    border-radius: 6px;
+
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 1em;
+    text-transform: capitalize;
+
+    transition: all 0.2s;
+}
+
+.filter:hover {
+    width: fit-content;
+}
+
+.filter-label {}
+
+.close-icon {
+    display: none;
+    color: #000;
+    width: 15px;
+    height: 15px;
+    margin-right: -0.3em;
+
+    /* margin-right: 15px; */
+}
+
+.filter:hover .close-icon {
+    display: inline-block;
+}
+
+
+
+.primary-filters {
+    display: grid;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-bottom: -560px;
+    padding-bottom: 600px;
+    grid-template-columns: repeat(3, 12rem);
+    -ms-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+    grid-gap: 1.5rem;
+}
+
+.primary-filters .filter-select span {
+    width: fit-content;
+    padding: 5px 8px;
+    color: rgb(var(--color-gray-800));
+    background-color: #ccc;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+
+
+
+
+
+.filter-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    min-height: 32px;
+    padding: 5px;
+}
+
+
+/* .label-select { */
+/* display: grid; */
+/* padding: 9px 16px; */
+/* margin-bottom: 5px; */
+/* align-items: center; */
+/* align-content: space-between; */
+/* background-color: #f0f0f0; */
+/* border-radius: 6px; */
+/* height: 39px; */
+/* cursor: pointer; */
+/* font-size: 1rem; */
+/* font-weight: 600; */
+/* grid-template-columns: auto auto; */
+/* letter-spacing: .04rem; */
+/* }  */
+
+.label-select {
+    display: flex;
+    /* add display flex */
+    padding: 9px 16px;
+    margin-bottom: 5px;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    height: 39px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04rem;
+}
+
+.label-select span {
+    margin-right: 8px;
+    /* add a margin between spans */
+}
+
+.label-select svg {
+    margin-left: auto;
+    /* push the icon to the right */
+}
+
+
+option {
+    padding: 8px 0 0 8px;
+}
+
+select option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+select {
+    position: absolute;
+    width: 90%;
+    top: 180%;
+    left: 50%;
+    z-index: 20000;
+    overflow-y: hidden;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}

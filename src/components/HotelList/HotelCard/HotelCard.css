@@ -192,24 +192,6 @@
     padding-right: 2rem;
 }
 
-.filters {
-    display: grid;
-    overflow-x: auto;
-    white-space: nowrap;
-    margin: 20px 0;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-bottom: -560px;
-    padding-bottom: 600px;
-    grid-template-columns: repeat(30, auto);
-    -ms-scroll-snap-type: x mandatory;
-    scroll-snap-type: x mandatory;
-    grid-gap: 0;
-}
-
-.filters .filter-select {
-    color: red;
-}
 
 
 .page-item {

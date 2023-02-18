@@ -5,7 +5,8 @@ import { IHotelCard, IFilter } from "../../interfaces/interfaces";
 import { HotelCard } from "./HotelCard/HotelCard";
 import { FilterCheckbox } from "./FilterCheckbox";
 import { Pagination } from "./Pagination";
-
+import React from 'react';
+import { MdFilterAlt, MdClose } from "react-icons/md";
 
 interface IWrapper {
     city: boolean,
@@ -33,9 +34,6 @@ export const HotelList = () => {
     const [filterList, setFilterList] = useState<IFilter>({
         city: [],
         style: ["seaside", "mountain", "urban"],
-        // facilities: ["wat", "xd"],
-        // facilities: "",
-        // price: undefined,
     });
     const [selectedFilter, setSelectedFilter] = useState<ITMP>({
         city: [],
@@ -47,14 +45,21 @@ export const HotelList = () => {
     })
 
 
+    const componentRef = useRef<HTMLDivElement>(null);
+    let totalCards = useRef(hotels.length);
+
+
     const indexOfLast = pagination.currentPage * pagination.cardsPerPage;
     const indexOfFirst = indexOfLast - pagination.cardsPerPage;
-    const currentHotel = hotels.slice(indexOfFirst, indexOfLast);
-    let totalCards = useRef(hotels.length);
+    // const currentHotel = hotels.slice(indexOfFirst, indexOfLast);
 
     useEffect(() => {
         setHotels(data);
     }, [hotels]);
+
+    useEffect(() => {
+        //console.log(selectedFilter);
+    }, [selectedFilter]);
 
     // put hotel names as unique values in filterList state
     useMemo(() => {
@@ -69,6 +74,7 @@ export const HotelList = () => {
             ...prev,
             city: arr
         }));
+
     }, [hotels]);
 
 
@@ -80,31 +86,19 @@ export const HotelList = () => {
         }))
 
         if (componentRef.current) {
-            componentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            componentRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
 
     }
 
 
     const filteredHotelsData = useMemo(() => {
-
-        // const filteredHotels = hotels.filter((hotel, index) => {
-        //     // if every checkbox is not checked
-        //     let tmp = 0;
-        //     for (let inc of filterList.city) if (!inc.checked) tmp += 1;
-        //     if (filterList.city.length === tmp) return hotel;
-
-        //     for (let inc of filterList.city) {
-        //         if ((inc.checked && inc.id === hotel.city)) return hotel;
-        //     }
-        //     return false;
-        // })
         let filteredHotels = hotels;
 
         if (selectedFilter.city?.length !== 0) {
-            // console.log("filtro")
-
-            console.log("test2test")
             filteredHotels = filteredHotels.filter((hotel) => {
                 return selectedFilter.city?.includes(hotel.city);
             })
@@ -112,55 +106,27 @@ export const HotelList = () => {
 
 
         if (selectedFilter.style?.length !== 0) {
-            // console.log("filtro")
-
-            console.log("test2test")
             filteredHotels = filteredHotels.filter((hotel) => {
                 return selectedFilter.style?.includes(hotel.style);
             })
         }
-
-        // 
-        //totalCards = filteredHotels.length;
         totalCards.current = filteredHotels.length;
-        return filteredHotels.slice(indexOfFirst, indexOfLast);
-        // return hotels.slice(indexOfFirst, indexOfLast);
 
+        return filteredHotels.slice(indexOfFirst, indexOfLast);
+        // eslint-disable-next-line
     }, [selectedFilter, filterList, pagination.currentPage]);
 
     const hotelCards = filteredHotelsData.map((hotelData, index) =>
         <HotelCard {...hotelData} key={index}></HotelCard>
     )
 
-
-    // handle checkbox
-    // const onChangeHandler = (
-    //     e: React.ChangeEvent<HTMLInputElement>,
-    //     id: string
-    // ) => {
-    //     setFilterList(prev => ({
-    //         ...prev,
-    //         city: prev.city.map(
-    //             el => el.id === id ? { ...el, checked: !el.checked } : el
-    //         )
-    //     }));
-    //     setPagination(prev => ({
-    //         ...prev,
-    //         currentPage: 1,
-    //     }));
-    // };
-
     const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        //const selectValue = event.target.value;
         const selectValues = Array.from(
             event.target.selectedOptions,
             (option) => option.value
         );
         const selectId = event.target.id as keyof ITMP;
-        // setSelectedFilter((prevState) => ({
-        //     ...prevState,
-        //     [selectId]: [...(prevState[selectId] || []), selectValue]
-        // }));
+
         setSelectedFilter((prevState) => ({
             ...prevState,
             [selectId]: selectValues
@@ -170,53 +136,56 @@ export const HotelList = () => {
 
     // TSX checkbox
     const selectFiltersTSX = (
-        <div className='filters'>
+        <div className='primary-filters'>
             {Object.entries(filterList).map(([key, value]) => (
                 <FilterCheckbox
                     key={key}
                     filterKey={key}
                     filter={value}
                     handleFilterChange={handleFilterChange}
+                    value={selectedFilter[key as keyof ITMP]}
                 />
             ))}
-            {/* <FilterCheckbox
-                key={1}
-                filterKey={"style"}
-                filter={filterList.style}
-                value={selectedFilter.style}
-                handleFilterChange={handleFilterChange}
-            />
-            <FilterCheckbox
-                key={2}
-                filterKey={"city"}
-                filter={filterList.city}
-                value={selectedFilter.city}
-                handleFilterChange={handleFilterChange}
-            /> */}
         </div>
     )
 
-    const componentRef = useRef<HTMLDivElement>(null);
+    const handleFilterDelete = (key: string, filterName: string) => {
+        setSelectedFilter(prev => ({
+            ...prev,
+            [key]: prev[key as keyof ITMP]?.filter((item: string) => item !== filterName) ?? []
+        }))
+    }
 
-    useEffect(() => {
-        console.log("selectedFilter")
-        console.log(selectedFilter)
-    }, [selectedFilter]);
 
+    const filterButtonsTSX = (
+        <div className='active-filters'>
+            <MdFilterAlt style={{ color: "#000", width: "40px", height: "40px", marginLeft: "-.7em" }} />
+            {Object.entries(selectedFilter).map(([key, value]) => (
+                <React.Fragment key={key} >
+                    {value.map((item: string) => (
+                        <div
+                            key={`filter-${item}`}
+                            className='filter'
+                            onClick={() => handleFilterDelete(key, item)}
+                        >
+                            <span
+                                key={`label-${item}`}
+                                className="filter-label"
+                            >
+                                {item}
+                            </span>
+                            <MdClose className='close-icon' />
+                        </div>
+                    ))}
 
-    useEffect(() => {
-        // console.log("totalCards")
-        // console.log(totalCards.current)
-        // console.log("curr")
-        // console.log(pagination.currentPage)
-    }, [totalCards.current]);
+                </React.Fragment>
+            ))}
+        </div>
+    )
 
     /* 
         TODO 
-        button opens modal with checkbox
-        for more filter criterias
-        pagination styling
-        pagination with filter correct page
+        style for select
         url link for pages
     */
 
@@ -225,15 +194,16 @@ export const HotelList = () => {
             <div className='row' ref={componentRef}>
 
                 <h1>Our hotels</h1>
-                <div className="filter-bar">
+                {/* <div className="filter-bar">
                     <button
                         onClick={() => setToggleWrapper(prev => ({ ...prev, city: !prev.city }))}
                     >
                         City
                     </button>
-                </div>
-
-                {toggleWrapper.city ? selectFiltersTSX : ""}
+                </div> */}
+                {selectFiltersTSX}
+                {/* {toggleWrapper.city ? selectFiltersTSX : ""} */}
+                {(selectedFilter.city?.length || selectedFilter.style?.length) ? (selectedFilter.city!.length > 0 || selectedFilter.style!.length > 0) && filterButtonsTSX : ""}
                 <article className="hotel-flex" >
                     {hotelCards}
                 </article>

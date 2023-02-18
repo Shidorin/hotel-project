@@ -19,16 +19,16 @@ interface IInputs {
 
 export const Contact = () => {
     const [formData, setFormData] = useState<IForm>({
-        firstName: undefined,
-        lastName: undefined,
-        email: undefined,
-        phoneNumber: undefined,
-        destination: undefined,
-        reason: undefined,
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        destination: "",
+        reason: "",
         message: undefined,
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     };
@@ -79,17 +79,23 @@ export const Contact = () => {
     const formTSX = (
         <>
             <div className='form-container'>
-
-                {inputs.map(input => (
-                    <div>
+                {inputs.map((input, key) => (
+                    <div key={key}>
                         <input
+                            key={`input-${key}`}
                             type="text"
                             name={input.varName}
                             id={input.varName}
                             value={formData[input.varName]}
                             onChange={handleChange}
                         />
-                        <label className={`${formData[input.varName] !== undefined ? "active" : ""}`} htmlFor={input.varName}>{input.text}</label>
+                        <label
+                            key={`label-${key}`}
+                            className={`${formData[input.varName] ? "active" : ""}`}
+                            htmlFor={input.varName}
+                        >
+                            {input.text}
+                        </label>
                     </div>
                 ))}
             </div>
@@ -105,9 +111,9 @@ export const Contact = () => {
                     }}
                     rows={7}
                     cols={50}
-                // onChange={handleChange}
+                    onChange={handleChange}
                 />
-                <label className={`${formData.message !== undefined ? "active" : ""}`} htmlFor="message">How can we help you?</label>
+                <label className={`${formData.message ? "active" : ""}`} htmlFor="message">How can we help you?</label>
             </div>
             <div style={{ textAlign: "center", marginTop: "1em" }}>
                 <button className='submit-btn' type="submit">Submit</button>
