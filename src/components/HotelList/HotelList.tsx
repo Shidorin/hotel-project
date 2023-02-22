@@ -1,12 +1,13 @@
 import './HotelList.css'
 import { data } from "../data"
 import { useEffect, useMemo, useRef, useState } from "react";
-import { IHotelCard, IFilter } from "../../interfaces/interfaces";
+import { IHotelCard, IFilter, ITMP } from "../../interfaces/interfaces";
 import { HotelCard } from "./HotelCard/HotelCard";
-import { FilterCheckbox } from "./FilterCheckbox";
+import { FilterSelect } from "./FilterSelect";
 import { Pagination } from "./Pagination";
 import React from 'react';
 import { MdFilterAlt, MdClose } from "react-icons/md";
+import { useParams, useNavigate } from 'react-router-dom';
 
 interface IWrapper {
     city: boolean,
@@ -15,12 +16,6 @@ interface IWrapper {
 interface IPagination {
     currentPage: number,
     cardsPerPage: number,
-}
-
-
-interface ITMP {
-    city?: string[],
-    style?: string[],
 }
 
 
@@ -35,10 +30,15 @@ export const HotelList = () => {
         city: [],
         style: ["seaside", "mountain", "urban"],
     });
-    const [selectedFilter, setSelectedFilter] = useState<ITMP>({
+    const initialFilter: ITMP = {
         city: [],
-        style: [],
-    });
+        style: []
+    };
+    const [selectedFilter, setSelectedFilter] = useState<ITMP>(
+        initialFilter || {
+            city: [],
+            style: [],
+        });
     const [pagination, setPagination] = useState<IPagination>({
         currentPage: 1,
         cardsPerPage: 6,
@@ -47,6 +47,10 @@ export const HotelList = () => {
 
     const componentRef = useRef<HTMLDivElement>(null);
     let totalCards = useRef(hotels.length);
+
+    const navigate = useNavigate();
+    const [urlParams, setUrlParams] = useState<URLSearchParams>(new URLSearchParams());
+
 
 
     const indexOfLast = pagination.currentPage * pagination.cardsPerPage;
@@ -57,9 +61,39 @@ export const HotelList = () => {
         setHotels(data);
     }, [hotels]);
 
+
+    // Load the selected filter from the URL
     useEffect(() => {
-        //console.log(selectedFilter);
-    }, [selectedFilter]);
+        const params = new URLSearchParams(window.location.search);
+        setUrlParams(params);
+        const newSelectedFilter: ITMP = {};
+
+        for (const key of Object.keys(initialFilter)) {
+            const values = params.getAll(key);
+            if (values.length > 0) {
+                const arrValues = values.reduce((prev: string[], current) => {
+                    return [...prev, ...current.split(",")];
+                }, []);
+                newSelectedFilter[key as keyof ITMP] = arrValues;
+            }
+        }
+        setSelectedFilter(newSelectedFilter);
+    }, []);
+
+    useEffect(() => {
+        const params = new URLSearchParams();
+        for (const key of Object.keys(selectedFilter)) {
+            const values = selectedFilter[key as keyof ITMP];
+            if (values && values.length > 0) { // add a check for `values`
+                params.set(key, values.join(','));
+            }
+        }
+
+        if (params.toString() !== urlParams.toString()) {
+            navigate(`?${params.toString()}`);
+        }
+    }, [selectedFilter, urlParams, navigate]);
+
 
     // put hotel names as unique values in filterList state
     useMemo(() => {
@@ -74,7 +108,6 @@ export const HotelList = () => {
             ...prev,
             city: arr
         }));
-
     }, [hotels]);
 
 
@@ -98,20 +131,19 @@ export const HotelList = () => {
     const filteredHotelsData = useMemo(() => {
         let filteredHotels = hotels;
 
-        if (selectedFilter.city?.length !== 0) {
+        if (selectedFilter.city && selectedFilter.city?.length !== 0) {
             filteredHotels = filteredHotels.filter((hotel) => {
                 return selectedFilter.city?.includes(hotel.city);
             })
         }
 
 
-        if (selectedFilter.style?.length !== 0) {
+        if (selectedFilter.style && selectedFilter.style?.length !== 0) {
             filteredHotels = filteredHotels.filter((hotel) => {
                 return selectedFilter.style?.includes(hotel.style);
             })
         }
         totalCards.current = filteredHotels.length;
-
         return filteredHotels.slice(indexOfFirst, indexOfLast);
         // eslint-disable-next-line
     }, [selectedFilter, filterList, pagination.currentPage]);
@@ -120,34 +152,19 @@ export const HotelList = () => {
         <HotelCard {...hotelData} key={index}></HotelCard>
     )
 
-    const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectValues = Array.from(
-            event.target.selectedOptions,
-            (option) => option.value
-        );
-        const selectId = event.target.id as keyof ITMP;
+    // const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     const selectValues = Array.from(
+    //         event.target.selectedOptions,
+    //         (option) => option.value
+    //     );
+    //     const selectId = event.target.id as keyof ITMP;
 
-        setSelectedFilter((prevState) => ({
-            ...prevState,
-            [selectId]: selectValues
-        }));
-        pagination.currentPage = 1;
-    };
-
-    // TSX checkbox
-    const selectFiltersTSX = (
-        <div className='primary-filters'>
-            {Object.entries(filterList).map(([key, value]) => (
-                <FilterCheckbox
-                    key={key}
-                    filterKey={key}
-                    filter={value}
-                    handleFilterChange={handleFilterChange}
-                    value={selectedFilter[key as keyof ITMP]}
-                />
-            ))}
-        </div>
-    )
+    //     setSelectedFilter((prevState) => ({
+    //         ...prevState,
+    //         [selectId]: selectValues
+    //     }));
+    //     pagination.currentPage = 1;
+    // };
 
     const handleFilterDelete = (key: string, filterName: string) => {
         setSelectedFilter(prev => ({
@@ -155,6 +172,39 @@ export const HotelList = () => {
             [key]: prev[key as keyof ITMP]?.filter((item: string) => item !== filterName) ?? []
         }))
     }
+
+    const handleFilterChange = (selectId: keyof ITMP, selectedOption: string) => {
+        if (!selectedFilter) {
+            return;
+        }
+        if (selectedFilter[selectId]?.includes(selectedOption)) {
+            handleFilterDelete(selectId, selectedOption);
+        } else {
+            setSelectedFilter((prevState) => ({
+                ...prevState,
+                [selectId]: [...prevState[selectId as keyof ITMP] ?? [], selectedOption]
+            }));
+        }
+        pagination.currentPage = 1;
+    };
+
+
+    // TSX checkbox
+    const selectFiltersTSX = (
+        <div className='primary-filters'>
+            {Object.entries(filterList).map(([key, value]) => (
+                <FilterSelect
+                    key={key}
+                    filterKey={key as keyof ITMP}
+                    filter={value}
+                    selectedFilter={selectedFilter[key as keyof ITMP]}
+                    onFilterChange={handleFilterChange}
+                />
+            ))}
+        </div>
+    )
+
+
 
 
     const filterButtonsTSX = (
@@ -172,14 +222,21 @@ export const HotelList = () => {
                                 key={`label-${item}`}
                                 className="filter-label"
                             >
-                                {item}
+                                {item.charAt(0).toUpperCase() + item.slice(1)}
                             </span>
                             <MdClose className='close-icon' />
                         </div>
                     ))}
-
                 </React.Fragment>
             ))}
+            {(selectedFilter.city?.length || selectedFilter.style?.length) &&
+                ((selectedFilter.city?.length || 0) + (selectedFilter.style?.length || 0) > 1) &&
+                <MdClose
+                    style={{ cursor: "pointer" }}
+                    className='icon'
+                    onClick={() => setSelectedFilter(initialFilter)}
+                />
+            }
         </div>
     )
 
@@ -203,7 +260,13 @@ export const HotelList = () => {
                 </div> */}
                 {selectFiltersTSX}
                 {/* {toggleWrapper.city ? selectFiltersTSX : ""} */}
-                {(selectedFilter.city?.length || selectedFilter.style?.length) ? (selectedFilter.city!.length > 0 || selectedFilter.style!.length > 0) && filterButtonsTSX : ""}
+                {/* below can be bugged? */}
+                {/* {(selectedFilter.city?.length || selectedFilter.style?.length) ?
+                    (selectedFilter.city!.length > 0 || selectedFilter.style!.length > 0) &&
+                    filterButtonsTSX : ""} */}
+                {selectedFilter.city?.length || selectedFilter.style?.length ? (
+                    <>{filterButtonsTSX}</>
+                ) : null}
                 <article className="hotel-flex" >
                     {hotelCards}
                 </article>

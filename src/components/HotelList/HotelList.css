@@ -132,18 +132,18 @@
 }
 
 
-option {
+.option {
     padding: 8px 0 0 8px;
 }
 
-select option {
+.option-list .option {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
 }
 
-select {
+.option-list {
     position: absolute;
     width: 90%;
     top: 180%;

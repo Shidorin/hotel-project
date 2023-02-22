@@ -6,8 +6,6 @@ export interface IFilter {
     // city: Array<ICheckbox>,
     city?: string[],
     style?: string[],
-    facilities?: string[],
-    price?: "asc" | "dsc" | undefined
 }
 
 export interface IHotelCard {
@@ -16,4 +14,9 @@ export interface IHotelCard {
     city: string,
     cost: number,
     style: string,
+}
+
+export interface ITMP {
+    city?: string[],
+    style?: string[],
 }
