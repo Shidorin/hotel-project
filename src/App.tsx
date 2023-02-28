@@ -1,11 +1,11 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom'
 import { About } from './components/About';
-import { Navbar } from "./components/Navbar/Navbar"
-import { Home } from './components/Home/Home';
-import { Cookies } from './components/Cookies/Cookies';
-import { Footer } from './components/Footer/Footer';
-import { Contact } from './components/Contact/Contact';
+import { Navbar } from "./components/pages/Navbar/Navbar"
+import { Home } from './components/pages/Home/Home';
+import { Cookies } from './components/pages/Cookies/Cookies';
+import { Footer } from './components/pages/Footer/Footer';
+import { Contact } from './components/pages/Contact/Contact';
 import { HotelList } from './components/HotelList/HotelList';
 
 function App() {

@@ -1,6 +1,6 @@
 
 
-import { CardCarousel } from "../../CardCarousel/CardCarousel";
+import { CardCarousel } from "../../pages/CardCarousel";
 import { Container } from "../Container/Container";
 
 

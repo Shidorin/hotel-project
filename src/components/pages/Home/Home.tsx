@@ -1,7 +1,6 @@
 
-import { ReserveRow } from '../ReserveRow/ReserveRow';
-import './Home.css'
-import { MainComponent } from './MainComponent/MainComponent';
+import { ReserveRow } from '../../ReserveRow/ReserveRow';
+import { MainComponent } from '../../Home/MainComponent/MainComponent';
 // import { HomeFilter } from "../HomeFilter/HomeFilter";
 
 
@@ -12,6 +11,5 @@ export const Home = () => {
             <ReserveRow />
             <MainComponent />
         </div>
-
     )
 };

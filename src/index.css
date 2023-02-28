@@ -61,30 +61,3 @@ h2 {
   margin-bottom: 1.5rem;
 }
 }
-
-/* BUTTON SUBMIT */
-
-.submit-btn {
-  background-color: #282828;
-  border: 1px solid #000;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-family: Neue Helvetica, helvetica, sans-serif;
-  font-size: .625rem;
-  font-style: normal;
-  font-weight: 700;
-  padding: 12px 20px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: background-color .3s ease-out, color .3s ease-out, border-color .3s ease-out;
-  border-radius: 5px;
-
-}
-
-.submit-btn:hover {
-  color: black;
-  background-color: white;
-}

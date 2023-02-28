@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import './Contact.css'
 
+import { MdErrorOutline } from 'react-icons/md'
+import { Button } from '../../../component_test/Button/Button';
+
 interface IForm {
-    firstName?: string,
-    lastName?: string,
-    email?: string,
-    phoneNumber?: string,
-    destination?: string,
-    reason?: string,
-    message?: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    destination: string,
+    reason: string,
+    message: string,
 }
 
 interface IInputs {
@@ -25,8 +28,9 @@ export const Contact = () => {
         phoneNumber: "",
         destination: "",
         reason: "",
-        message: undefined,
+        message: "",
     });
+    const [formError, setFormError] = useState<boolean>(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -35,8 +39,9 @@ export const Contact = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(formData);
-        // Perform form submission logic here
+        // console.log(formData);
+
+        setFormError(true)
     };
 
     const [inputs] = useState<IInputs[]>([
@@ -115,8 +120,13 @@ export const Contact = () => {
                 />
                 <label className={`${formData.message ? "active" : ""}`} htmlFor="message">How can we help you?</label>
             </div>
+
+
             <div style={{ textAlign: "center", marginTop: "1em" }}>
-                <button className='submit-btn' type="submit">Submit</button>
+                <Button
+                    className='submit-btn'
+                    children='Submit'
+                />
             </div>
         </>
 
@@ -129,10 +139,17 @@ export const Contact = () => {
             <div className='row'>
 
                 <h1>Contact us</h1>
+                {formError &&
+                    <div className='form-error'>
+                        <MdErrorOutline style={{ width: "20px", height: "20px", color: "#e3f2fd" }} />
+                        <span className='form-error-span'>
+                            Error connecting to server
+                        </span>
+
+                    </div>}
                 <form
                     onSubmit={handleSubmit}
                     className='form'
-                // style={{ maxWidth: "100rem", margin: "auto" }}
                 >
                     {formTSX}
                 </form >

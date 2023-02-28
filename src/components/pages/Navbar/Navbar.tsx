@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { text } from 'stream/consumers';
 import './Navbar.css'
 import { MdClose } from "react-icons/md"
 import { FiMenu } from "react-icons/fi"

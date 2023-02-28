@@ -33,7 +33,6 @@
     width: fit-content;
 }
 
-.filter-label {}
 
 .close-icon {
     display: none;
@@ -140,7 +139,8 @@
 
 
 .option {
-    padding: 8px 0 0 8px;
+    padding: 8px 0 0 8px !important;
+
 }
 
 .option-list .option {
@@ -148,6 +148,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
+    cursor: pointer;
 }
 
 .option-list {

@@ -1,10 +1,11 @@
-import { CardContainer } from "./CardContainer"
-import "./CardCarousel.css"
+import { CardContainer } from "../CardCarousel/CardContainer"
+import "../../components/CardCarousel/CardCarousel.css"
+
+
+const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
 export const CardCarousel = () => {
 
-
-    const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     const cardList = (
         <ul className="card-list">
             <li><CardContainer
