@@ -12,8 +12,8 @@ export function Container({ title, text, img }: IContainer) {
         <div className='row'>
             <div className="container-flexbox">
                 <div className="container-text">
-                    <h4>tekst title</h4>
-                    <p>tekst</p>
+                    <h4>{title}</h4>
+                    <p>{text}</p>
                 </div>
                 <div>
 

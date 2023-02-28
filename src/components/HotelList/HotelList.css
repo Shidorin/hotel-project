@@ -89,6 +89,13 @@
     padding: 5px;
 }
 
+.filter-select h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 10px 0 10px 5px;
+    text-transform: capitalize;
+}
+
 
 /* .label-select { */
 /* display: grid; */
@@ -146,13 +153,18 @@
 .option-list {
     position: absolute;
     width: 90%;
-    top: 180%;
-    left: 50%;
-    z-index: 20000;
+    top: 100%;
+    /* left: 50%; */
+    z-index: 500;
     overflow-y: hidden;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
     background-color: #fff;
     border-radius: 10px;
     padding: 5px;
     border: 1px solid #ccc;
+}
+
+.small {
+    margin: 0;
+    padding: 0;
 }

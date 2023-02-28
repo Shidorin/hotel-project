@@ -17,17 +17,8 @@ export const Footer = () => {
             <p>social linki</p>
             <p>hotel copyright</p>
             <p>social linki</p>
-            <p>hotel copyright</p>
-            <p>social linki</p>
-            <p>hotel copyright</p>
-            <p>social linki</p>
-            <p>hotel copyright</p>
-            <p>social linki</p>
-            <p>hotel copyright</p>
-            <p>social linki</p>
-            <p>hotel copyright</p>
-            <p>social linki</p>
-            <p>hotel copyright</p>
+                <p>hotel copyright</p>
+                <p>social linki</p>
         </div>
     )
 

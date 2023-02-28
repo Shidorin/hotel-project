@@ -81,7 +81,7 @@
     color: #282828;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1201px) {
     .img-div img {
         width: 100%;
         max-height: 55rem;
@@ -117,7 +117,7 @@
 
 
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
 
     .navbar-list {
         display: none;

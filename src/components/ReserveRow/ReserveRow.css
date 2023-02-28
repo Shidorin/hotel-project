@@ -4,3 +4,36 @@
     font-variant-caps: all-petite-caps;
     color: white;
 }
+
+
+.flex-container {
+    display: flex;
+    column-gap: 15px;
+}
+
+.flex-item {
+    flex-grow: 1;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.flex-item-1 {
+    flex-basis: 33%;
+}
+
+.flex-item-2,
+.flex-item-3 {
+    flex-basis: 50%;
+}
+
+.flex-row {
+    display: flex;
+}
+
+.flex-item-4 {
+    flex-basis: 33%;
+}
+
+.flex-item-5 {
+    flex-basis: 33%;
+}
