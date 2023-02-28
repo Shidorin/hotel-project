@@ -1,5 +1,6 @@
-import { CardContainer } from "../CardCarousel/CardContainer"
-import "../../components/CardCarousel/CardCarousel.css"
+
+import "../components/CardCarousel/CardCarousel.css"
+import { CardContainer } from "../components/CardCarousel/CardContainer";
 
 
 const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";

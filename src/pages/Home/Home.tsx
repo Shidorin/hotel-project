@@ -1,7 +1,5 @@
-
-import { ReserveRow } from '../../ReserveRow/ReserveRow';
-import { MainComponent } from '../../Home/MainComponent/MainComponent';
-// import { HomeFilter } from "../HomeFilter/HomeFilter";
+import { MainComponent } from "../../components/Home/MainComponent/MainComponent";
+import { ReserveRow } from "../../components/ReserveRow/ReserveRow";
 
 
 

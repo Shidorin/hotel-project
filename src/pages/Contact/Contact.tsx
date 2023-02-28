@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './Contact.css'
 
 import { MdErrorOutline } from 'react-icons/md'
-import { Button } from '../../../component_test/Button/Button';
+import { Button } from '../../component_test/Button/Button';
 
 interface IForm {
     firstName: string,
