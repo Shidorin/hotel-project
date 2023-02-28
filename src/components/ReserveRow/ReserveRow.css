@@ -1,5 +1,6 @@
 .reservation-row {
-    height: 10rem;
+    height: fit-content;
+    padding-bottom: 1em;
     background-color: #282828;
     font-variant-caps: all-petite-caps;
     color: white;
@@ -13,7 +14,6 @@
 
 .flex-item {
     flex-grow: 1;
-    border: 1px solid black;
     box-sizing: border-box;
 }
 
@@ -28,12 +28,29 @@
 
 .flex-row {
     display: flex;
+    column-gap: 15px;
 }
 
 .flex-item-4 {
+    display: flex;
+    justify-content: center;
     flex-basis: 33%;
+    height: fit-content;
 }
 
 .flex-item-5 {
+    display: flex;
+    justify-content: center;
     flex-basis: 33%;
+    height: fit-content;
+}
+
+@media (max-width: 1200px) {
+
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        column-gap: 15px;
+        row-gap: 10px;
+    }
 }

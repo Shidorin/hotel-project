@@ -1,7 +1,9 @@
 import "./ReserveRow.css"
 import { Select } from "../../component_test/select/Select"
-import { useState } from "react"
-
+import { useEffect, useState } from "react"
+import { data } from "../../components/data"
+import { Button } from "../../component_test/Button/Button";
+import { DatePickerComponent } from "../../component_test/select/DatePicker";
 
 interface IOption {
     label: string;
@@ -13,13 +15,6 @@ interface ISelectedOptions {
     room: string,
     guest: string,
 }
-
-
-const options: IOption[] = [
-    { label: "Option 1", value: "option1" },
-    { label: "Option 2", value: "option2" },
-    { label: "Option 3", value: "option3" },
-];
 
 const roomOptions: IOption[] = [
     { label: "1 Room", value: "1 Room" },
@@ -44,12 +39,27 @@ export const ReserveRow = () => {
         guest: "2 Guests",
     });
 
+    const [hotelOption, setHotelOption] = useState<IOption[]>([])
+
+
+    useEffect(() => {
+        const options = data.map((item) => ({
+            label: item.city,
+            value: item.city,
+        }));
+        setHotelOption(options);
+    }, []);
+
 
     const handleSelectChange = (value: string, key: string) => {
         setSelectedOption(prev => ({
             ...prev,
             [key]: value
         }))
+    };
+
+    const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault();
     };
 
     return (
@@ -59,18 +69,21 @@ export const ReserveRow = () => {
                 <h3>Make a Reservation</h3>
 
 
-                <div className="flex-container">
+                <form
+                    className="flex-container"
+                    onSubmit={handleSubmit}
+                >
                     <div className="flex-item flex-item-1">
                         <Select
                             keySelect="option"
-                            value={options}
+                            value={hotelOption}
                             selected={selectedOption.option}
                             handleSelectChange={handleSelectChange}
                         />
                         <div className="flex-row">
                             <div className="flex-item flex-item-2">
                                 <Select
-                                    key={"wat"}
+                                    key={"key1"}
                                     keySelect="room"
                                     value={roomOptions}
                                     selected={selectedOption.room}
@@ -80,7 +93,7 @@ export const ReserveRow = () => {
 
                             <div className="flex-item flex-item-3">
                                 <Select
-                                    key={"diff"}
+                                    key={"key2"}
                                     keySelect="guest"
                                     value={guestOptions}
                                     selected={selectedOption.guest}
@@ -89,13 +102,17 @@ export const ReserveRow = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex-item flex-item-4">Element 4</div>
-                    <div className="flex-item flex-item-5">Element 5</div>
-                </div>
-
-
+                    <div className="flex-item flex-item-4">
+                        <DatePickerComponent />
+                    </div>
+                    <div className="flex-item flex-item-5">
+                        <Button
+                            className="submit-btn light long"
+                            children={"Reserve"}
+                        />
+                    </div>
+                </form>
             </div>
         </section>
-
     )
 }
