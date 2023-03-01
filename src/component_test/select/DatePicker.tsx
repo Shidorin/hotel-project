@@ -10,8 +10,8 @@ interface ISelectedDate {
 
 export const DatePickerComponent = () => {
     const [selectedDate, setSelectedDate] = useState<ISelectedDate>({
-        startDate: null,
-        endDate: null,
+        startDate: new Date,
+        endDate: new Date,
     });
 
     const handleDateChange = (dates: [Date | null, Date | null]) => {
