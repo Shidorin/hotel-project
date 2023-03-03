@@ -10,7 +10,7 @@ const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/hotel-project'>
       <App />
     </BrowserRouter>
   </React.StrictMode>
