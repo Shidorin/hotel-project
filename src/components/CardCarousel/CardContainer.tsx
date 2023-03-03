@@ -18,7 +18,9 @@ export const CardContainer = ({ title, text, link, imgsrc, alt }: ICardContainer
         <div className="carousel-child">
 
             <picture>
-                <img src={imgsrc} alt={alt} loading="lazy" />
+                <Link to={link}>
+                    <img src={imgsrc} alt={alt} loading="lazy" />
+                </Link>
             </picture>
             <div className="card-body">
                 <h3>{title}</h3>
