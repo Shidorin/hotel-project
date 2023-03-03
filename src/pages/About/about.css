@@ -1,0 +1,11 @@
+.text p {
+    padding: .5em 0em;
+}
+
+.text ul {
+    margin-left: 2em;
+}
+
+.text {
+    margin: 0 12px;
+}
