@@ -1,0 +1,13 @@
+.error-div {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    row-gap: 3rem;
+}
+
+.icon-large {
+    height: 5rem;
+    width: 5rem;
+}
