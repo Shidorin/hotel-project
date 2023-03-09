@@ -9,6 +9,7 @@ import { Contact } from './pages/Contact/Contact';
 import { HotelList } from './components/HotelList/HotelList';
 import { ErrorPage } from './components/ErrorPage';
 import ScrollToTop from './features/ScrollToTop';
+import { Hotel } from './pages/HotelEntity/Hotel';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='contact' element={<Contact />} />
         <Route path='hotels' element={<HotelList />} />
         <Route path='*' element={<ErrorPage />} />
+        <Route path='/hotel/:hotelName' element={<Hotel />} />
       </Routes>
       <Footer />
       <Cookies />

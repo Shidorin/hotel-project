@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MdOutlineKeyboardArrowDown, MdCheckCircle } from "react-icons/md"
+import { MdOutlineKeyboardArrowDown } from "react-icons/md"
 
 
 interface IOption {
@@ -12,9 +12,16 @@ interface SelectProps {
     value: IOption[];
     selected: string;
     handleSelectChange: (selectedOption: string, key: string) => void;
+    disabled?: boolean;
 };
 
-export const Select = ({ keySelect, value, selected, handleSelectChange }: SelectProps) => {
+export const Select = ({
+    keySelect,
+    value,
+    selected,
+    handleSelectChange,
+    disabled
+}: SelectProps) => {
 
     const [showDropdown, setShowDropdown] = useState(false);
     const selectRef = useRef<HTMLDivElement | null>(null);
@@ -22,6 +29,7 @@ export const Select = ({ keySelect, value, selected, handleSelectChange }: Selec
 
     // selected option
     const handleDropdownClick = () => {
+        if (disabled) return;
         setShowDropdown(!showDropdown);
     };
 
@@ -40,6 +48,7 @@ export const Select = ({ keySelect, value, selected, handleSelectChange }: Selec
 
 
     const handleChange = (value: string, keySelect: string) => {
+
         handleSelectChange(value, keySelect)
         setShowDropdown(false);
     }
@@ -52,7 +61,8 @@ export const Select = ({ keySelect, value, selected, handleSelectChange }: Selec
                     className="option small"
                     role="option"
                     key={key}
-                    onClick={() => handleChange(item.value, keySelect)}
+                    onClick={() => {handleChange(item.value, keySelect) }}
+                    aria-selected={selected === item.label ? "true" : "false"}
                 >
                     {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
                 </div>
@@ -68,7 +78,7 @@ export const Select = ({ keySelect, value, selected, handleSelectChange }: Selec
         >
             <div
                 className={`label-select ${showDropdown ? 'dropdown' : ''}`}
-                role="select"
+                role="listbox"
                 onClick={handleDropdownClick}
                 style={{ color: "black" }}
             >
