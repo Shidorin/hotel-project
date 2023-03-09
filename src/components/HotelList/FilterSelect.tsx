@@ -1,13 +1,6 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ITMP } from "../../interfaces/interfaces";
 import { MdOutlineKeyboardArrowDown, MdCheckCircle } from "react-icons/md"
-
-interface IFilter {
-    filterKey: string;
-    filter?: string[];
-    handleFilterChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-    value?: string[];
-}
 
 
 
@@ -66,6 +59,7 @@ export const FilterSelect = ({
                 <div
                     className="option"
                     role="option"
+                    aria-selected={selectedFilter?.includes(item)}
                     key={key}
                     onClick={() => handleOptionClick(item)}
                 >
@@ -92,7 +86,7 @@ export const FilterSelect = ({
             <h4>{filterKey}</h4>
             <div
                 className={`label-select ${showDropdown ? 'dropdown' : ''}`}
-                role="select"
+                role="listbox"
                 onClick={handleDropdownClick}
             >
                 {selectedTag?.length === 0 && <span
@@ -109,41 +103,3 @@ export const FilterSelect = ({
         </div>
     );
 };
-
-
-    // return (
-    //     <div className="filter-select">
-    //         <div
-    //             className={`label-select ${showDropdown ? 'dropdown' : ''}`}
-    //             onClick={handleDropdownClick}
-    //         >
-    //             {selectedTag?.length === 0 ? <span style={{ backgroundColor: "#f0f0f0" }}> any </span> : ""}
-    //             {selectedTag?.length !== 0 ? <span>{firstTag}</span> : ""}
-    //             {tagCount > 0 && <span>+{tagCount}</span>}
-    //             <MdOutlineKeyboardArrowDown style={{ marginLeft: "auto" }} />
-    //         </div>
-    //         {showDropdown && (
-    //             <select
-    //                 id={filterKey}
-    //                 onChange={handleFilterChange}
-    //                 multiple={true}
-    //                 value={value}
-    //                 ref={selectRef}
-    //             >
-    //                 {filter?.map((item, key) => (
-    //                     <option
-    //                         value={item}
-    //                         key={key}
-    //                     >
-    //                         {item}
-    //                         {selectedTag?.includes(item) &&
-    //                             <MdCheckCircle
-    //                                 style={{ width: "20px", height: "20px", marginLeft: "auto" }}
-    //                             />}
-    //                     </option>
-    //                 ))}
-    //             </select>
-    //         )}
-    //     </div>
-    // )
-//}

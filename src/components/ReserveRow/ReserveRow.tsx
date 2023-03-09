@@ -31,10 +31,16 @@ const guestOptions: IOption[] = [
     { label: "6 Guests", value: "6 Guests" },
 ];
 
-export const ReserveRow = () => {
+interface IReserve {
+    hotelName?: string,
+}
+
+export const ReserveRow = ({
+    hotelName
+}: IReserve) => {
 
     const [selectedOption, setSelectedOption] = useState<ISelectedOptions>({
-        option: "",
+        option: hotelName || "",
         room: "1 Room",
         guest: "2 Guests",
     });
@@ -44,9 +50,9 @@ export const ReserveRow = () => {
 
     useEffect(() => {
         const options = data.map((item) => ({
-            label: item.city,
-            value: item.city,
-        }));
+            label: item.name,
+            value: item.name,
+        })).sort((a, b) => a.value.localeCompare(b.value));
         setHotelOption(options);
     }, []);
 
@@ -79,6 +85,7 @@ export const ReserveRow = () => {
                             value={hotelOption}
                             selected={selectedOption.option}
                             handleSelectChange={handleSelectChange}
+                            disabled={hotelName ? true : false}
                         />
                         <div className="flex-row">
                             <div className="flex-item flex-item-2">

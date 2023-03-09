@@ -7,11 +7,8 @@ import { FilterSelect } from "./FilterSelect";
 import { Pagination } from "./Pagination";
 import React from 'react';
 import { MdFilterAlt, MdClose } from "react-icons/md";
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-interface IWrapper {
-    city: boolean,
-}
 
 interface IPagination {
     currentPage: number,
@@ -20,11 +17,6 @@ interface IPagination {
 
 
 export const HotelList = () => {
-
-
-    const [toggleWrapper, setToggleWrapper] = useState<IWrapper>({
-        city: false,
-    })
     const [hotels, setHotels] = useState<IHotelCard[]>([]);
     const [filterList, setFilterList] = useState<IFilter>({
         city: [],
@@ -78,6 +70,7 @@ export const HotelList = () => {
             }
         }
         setSelectedFilter(newSelectedFilter);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
