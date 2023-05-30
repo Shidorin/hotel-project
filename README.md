@@ -4,7 +4,7 @@ Hotel chain website featuring mobile friendly UI, hotel filter with a pagination
 
 # Table of Contents
 
-- [Introduction](#Portfolio)
+- [Introduction](#Hotel-Website)
 - [Demo](#Demo)
 - [Technologies](#Technologies)
 - [Project Structure](#project-structure)
