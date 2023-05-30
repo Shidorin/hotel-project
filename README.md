@@ -1,4 +1,4 @@
-# Portfolio
+# Hotel Website
 
 Hotel chain website featuring mobile friendly UI, hotel filter with a pagination and query string added to the URL, and option to choose and book room for specific hotel.
 
